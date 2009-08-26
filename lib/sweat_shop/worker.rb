@@ -50,11 +50,14 @@ module SweatShop
     end
 
     def self.enqueue(task)
+      log("Send message: #{task.inspect} to #{queue_name} by #{self.inspect}")
       queue.enqueue(queue_name, task)
     end
 
     def self.dequeue
-      queue.dequeue(queue_name)
+      task = queue.dequeue(queue_name)
+      log("Receive message: #{task.inspect} from #{queue_name} by #{self.inspect}")
+      task
     end
 
     def self.confirm
