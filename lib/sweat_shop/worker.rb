@@ -56,7 +56,9 @@ module SweatShop
 
     def self.dequeue
       task = queue.dequeue(queue_name)
-      log("Receive message: #{task.inspect} from #{queue_name} by #{self.inspect}")
+      unless task.nil?
+        log("Receive message: #{task.inspect} from #{queue_name} by #{self.inspect}")
+      end
       task
     end
 
